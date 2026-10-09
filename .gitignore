@@ -108,8 +108,8 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
-/apple_picker/Apple Picker - Natalie Petersen/Library/Artifacts
-/apple_picker/Apple Picker - Natalie Petersen/Library/Bee/artifacts
-/apple_picker/Apple Picker - Natalie Petersen/Library/Bee
 /apple_picker/Apple Picker - Natalie Petersen/Library
 *.meta
+/Antifishing - Natalie Petersen/Library
+/Antifishing - Natalie Petersen/Temp
+apple_picker/Apple Picker - Natalie Petersen/Assets/Sounds/DEPRECATED_apple_picker_ambience_2.wav

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1538047214739691742, guid: 0796c35abe686424a80109ae447f03ab, type: 3}
       propertyPath: landClip
       value: 
-      objectReference: {fileID: 8300000, guid: 2bd0aae55ba41ea4f94197d780c9b5d6, type: 3}
+      objectReference: {fileID: 8300000, guid: 0c9199a95ef153040b031e01d83761d1, type: 3}
     - target: {fileID: 4774811808174029870, guid: 0796c35abe686424a80109ae447f03ab, type: 3}
       propertyPath: m_LocalScale.y
       value: 4

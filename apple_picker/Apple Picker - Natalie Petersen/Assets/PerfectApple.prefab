@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -6157153046306872278, guid: a26f118665b278144ae3bfcac78c8b5e, type: 3}
       propertyPath: fallClip
       value: 
-      objectReference: {fileID: 8300000, guid: c4a74fe074df4714982178ce27eefdf4, type: 3}
+      objectReference: {fileID: 8300000, guid: 3f36c6b11432a3c4cb716dcfc93e13c5, type: 3}
     - target: {fileID: -6157153046306872278, guid: a26f118665b278144ae3bfcac78c8b5e, type: 3}
       propertyPath: missClip
       value: 
