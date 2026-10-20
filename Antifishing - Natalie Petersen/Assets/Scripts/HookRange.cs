@@ -4,7 +4,7 @@ public class HookRange : MonoBehaviour
 {
     [Header("Inscribed")]
     float speed = 0.075f;
-    float leftAndRightEdge = 8f;
+    float leftAndRightEdge = 7f;
     float chanceChangeDirection = 0.15f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -12,7 +12,7 @@ public class HookRange : MonoBehaviour
     {
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {

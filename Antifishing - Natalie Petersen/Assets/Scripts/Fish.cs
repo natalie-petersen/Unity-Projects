@@ -16,6 +16,10 @@ public class Fish : MonoBehaviour
     float lastClick = 0f; //used to calculate delta time
     [SerializeField]
     float hp = 100;
+    [SerializeField]
+    float dmg = 10f;
+    [SerializeField]
+    float winTime = 15f; //seconds until win
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,8 +28,23 @@ public class Fish : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //move left
         Vector3 pos = this.transform.position;
+        if (Time.time >= winTime)
+        {
+            //win
+            GameObject HookRangeGO = GameObject.Find("HookRange");
+            Destroy(HookRangeGO);
+            //animation
+            pos.x = 1;
+            while(pos.x < 12 || Time.time >= 18)
+            {
+                pos.x *= 1.02f;
+                this.transform.position = pos;
+            }
+            UnityEditor.EditorApplication.isPaused = true; //TODO: move back to original scene
+        }
+        //move left
+        
         pos.x -= speed;
         if(pos.x < -leftAndRightEdge)
         {
@@ -45,7 +64,6 @@ public class Fish : MonoBehaviour
     public void click()
     {
         lastClick = Time.time;
-        Debug.Log("click");
         Vector3 pos = this.transform.position;
         pos.x += push;
         if (pos.x > leftAndRightEdge)
@@ -64,12 +82,11 @@ public class Fish : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("COLLIDED!");
         GameObject collidedObj = other.gameObject;
         if (collidedObj.CompareTag("HealthDraining"))
         {
             //take damage (keep in mind this is happening on loop, so not too much at a time)
-            hp -= 0.5f;
+            hp -= dmg;
         }
     }
 }

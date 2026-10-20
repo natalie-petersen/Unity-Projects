@@ -1,4 +1,3 @@
 repository "Antifishing - Natalie Petersen/Antifishing - Natalie Petersen@1375160375076@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main"
