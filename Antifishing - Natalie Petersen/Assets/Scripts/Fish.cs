@@ -19,29 +19,30 @@ public class Fish : MonoBehaviour
     [SerializeField]
     float dmg = 10f;
     [SerializeField]
-    float winTime = 15f; //seconds until win
+    private float timeSinceSceneLoad;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      //  clickAction.Enable();
+        timeSinceSceneLoad = Time.time;
     }
 
     private void FixedUpdate()
     {
         Vector3 pos = this.transform.position;
-        if (Time.time >= winTime)
+        if ((Time.time-timeSinceSceneLoad) >= Root.minigameDuration)
         {
-            //win
-            GameObject HookRangeGO = GameObject.Find("HookRange");
-            Destroy(HookRangeGO);
+            Debug.Log("unloading, time is " + Time.timeSinceLevelLoadAsDouble);
             //animation
             pos.x = 1;
-            while(pos.x < 12 || Time.time >= 18)
+            while(pos.x < 12)
             {
                 pos.x *= 1.02f;
                 this.transform.position = pos;
             }
-            UnityEditor.EditorApplication.isPaused = true; //TODO: move back to original scene
+            SceneManager.UnloadSceneAsync("fishingMinigame");
+            Root root = GameObject.FindWithTag("Root").GetComponent<Root>();
+            root.isPaused = false;
+            
         }
         //move left
         
