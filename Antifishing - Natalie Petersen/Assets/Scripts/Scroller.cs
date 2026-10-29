@@ -26,6 +26,7 @@ public class Scroller : MonoBehaviour
         {
             if (!fish.leavingInProgress) //only call once
             {
+                Debug.Log(fish.transform.position);
                 fish.LeaveScreen();
             }
             return;

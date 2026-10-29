@@ -10,10 +10,13 @@ public class Hook : MonoBehaviour
     float leftAndRightEdge = 1.5f;
     [SerializeField]
     float chanceChangeDirection = 0.0025f;
+    [SerializeField]
+    Root root;
 
     // Update is called once per frame
     void Update()
     {
+        if (root.isPaused) { return; } //don't move if paused
         Vector3 pos = this.transform.position;
         pos.y += speed;
         if (pos.y < -leftAndRightEdge)

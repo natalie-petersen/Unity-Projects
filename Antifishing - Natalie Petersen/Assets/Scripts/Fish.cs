@@ -20,6 +20,8 @@ public class Fish : MonoBehaviour
     float dmg = 10f;
     [SerializeField]
     private float timeSinceSceneLoad;
+    [SerializeField]
+    private AudioSubclipPlayer soundPlayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,6 +66,7 @@ public class Fish : MonoBehaviour
     }
     public void click()
     {
+        soundPlayer.playRandomClip();
         lastClick = Time.time;
         Vector3 pos = this.transform.position;
         pos.x += push;
