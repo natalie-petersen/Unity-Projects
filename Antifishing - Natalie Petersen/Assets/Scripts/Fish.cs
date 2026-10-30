@@ -22,15 +22,20 @@ public class Fish : MonoBehaviour
     private float timeSinceSceneLoad;
     [SerializeField]
     private AudioSubclipPlayer soundPlayer;
+    [SerializeField]
+    AudioSource audioSource;
+    AudioClip[] swimClips;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         timeSinceSceneLoad = Time.time;
+        swimClips = Resources.LoadAll<AudioClip>("fish_swim"); //load all sounds from fish_swim folder
     }
 
     private void FixedUpdate()
     {
         Vector3 pos = this.transform.position;
+        Root root = GameObject.FindWithTag("Root").GetComponent<Root>();
         if ((Time.time-timeSinceSceneLoad) >= Root.minigameDuration)
         {
             Debug.Log("unloading, time is " + Time.timeSinceLevelLoadAsDouble);
@@ -42,7 +47,6 @@ public class Fish : MonoBehaviour
                 this.transform.position = pos;
             }
             SceneManager.UnloadSceneAsync("fishingMinigame");
-            Root root = GameObject.FindWithTag("Root").GetComponent<Root>();
             root.isPaused = false;
             
         }
@@ -61,12 +65,21 @@ public class Fish : MonoBehaviour
             Quaternion r = this.transform.localRotation;
             r.x = 180;
             this.transform.localRotation = r;
-            UnityEditor.EditorApplication.isPaused = true; //TODO: replace with an actual death screen
+            SceneManager.LoadScene("Loss",LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("AudioPlayer");
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+            foreach(GameObject obj in objs)
+            {
+                obj.SetActive(false);
+            }
+            root.isPaused = true;
+            SceneManager.UnloadSceneAsync("fishingMinigame");
         }
     }
     public void click()
     {
-        soundPlayer.playRandomClip();
+        AudioClip randSfx = swimClips[UnityEngine.Random.Range(0, swimClips.Length)];
+        audioSource.PlayOneShot(randSfx);
         lastClick = Time.time;
         Vector3 pos = this.transform.position;
         pos.x += push;

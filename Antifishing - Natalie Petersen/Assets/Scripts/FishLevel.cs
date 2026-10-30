@@ -12,6 +12,8 @@ public class FishLevel : MonoBehaviour
     [SerializeField] float duration = 2f;
     float elapsed = 0f;
     [SerializeField] Transform endPoint;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip goalSFX;
     Transform startPoint;
     public bool leavingInProgress = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,6 +39,26 @@ public class FishLevel : MonoBehaviour
                 float curveVal = animCurve.Evaluate(pct);
                 Debug.Log("MOVING " + curveVal);
                 transform.position = Vector2.LerpUnclamped(startPoint.position, endPoint.position, curveVal);
+            }
+            else
+            {
+                leavingInProgress = false;
+                //if we're on the last level, win screen
+                if (root.currentLevel == 2)
+                {
+                    SceneManager.LoadScene("Win", LoadSceneMode.Additive);
+                    this.gameObject.SetActive(false);
+                    root.isPaused = true;
+                    return;
+                }
+                root.nextLevel();
+                //reset position for the next level
+                Vector3 pos = this.transform.position;
+                pos.x = -4;
+                pos.y = 0;
+                this.transform.position = pos;
+                
+
             }
         }
         else
@@ -83,11 +105,12 @@ public class FishLevel : MonoBehaviour
     public void LeaveScreen()
     {
         if (root.isPaused || leavingInProgress) { return; }
+        audioSource.PlayOneShot(goalSFX);
         Debug.Log("swim away");
         elapsed = 0f;
         startPoint = this.transform;
         Vector3 pos = this.transform.position;
-        pos.y += 3;
+        pos.y = 2;
         pos.x += 14;
         endPoint.position = pos;
         leavingInProgress = true;

@@ -8,6 +8,7 @@ TagManager:
   - Hook
   - HealthDraining
   - Root
+  - Level
   layers:
   - Default
   - TransparentFX
